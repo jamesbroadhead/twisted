@@ -49,10 +49,14 @@ def _setHostNameIndication(connection, hostname):
 
 
 
-if getattr(SSL.Connection, "set_tlsext_host_name", None) is None:
-    _maybeSetHostNameIndication = _cantSetHostnameIndication
-else:
-    _maybeSetHostNameIndication = _setHostNameIndication
+# The presence of the attribute is not enough to indicate that the underlying lib
+#   exports the symbol
+_maybeSetHostNameIndication = _cantSetHostnameIndication
+
+#if getattr(SSL.Connection, "set_tlsext_host_name", None) is None:
+#    _maybeSetHostNameIndication = _cantSetHostnameIndication
+#else:
+#    _maybeSetHostNameIndication = _setHostNameIndication
 
 
 
